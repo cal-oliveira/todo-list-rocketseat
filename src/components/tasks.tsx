@@ -5,10 +5,11 @@ interface Task {
 
 interface TasksProps {
     tasks: Task[],
-    deleteTask: (task: string) => void
+    deleteTask: (task: string) => void,
+    updateTask: (task: string) => void
 }
 
-export function Tasks({tasks,deleteTask}: TasksProps){
+export function Tasks({tasks,deleteTask,updateTask}: TasksProps){
 
     const completedTasks = tasks.filter((task) => task.isDone === true)
 
@@ -50,13 +51,15 @@ export function Tasks({tasks,deleteTask}: TasksProps){
         <div className="space-y-3">
             {tasks.map((task) => (
                 <div key={task.task} className="bg-gray-500 rounded-lg flex items-start px-4 py-4 gap-3">
-                    <button>
-                        {task.isDone ? (
+                    {task.isDone ? (
+                        <button onClick={() => updateTask(task.task)}>
                             <img src="./check.png" alt="check" />
-                        ):(
+                        </button>
+                    ):(
+                        <button onClick={() => updateTask(task.task)}>
                             <img src="./uncheck.png" alt="uncheck" />
-                        )}
-                    </button>
+                        </button>
+                    )}
                     <p className={`text-gray-100 text-sm ${task.isDone && 'line-through text-gray-300'}`}>{task.task}</p>
                     <button onClick={()=> deleteTask(task.task)}>
                         <img src="./trash.png" alt="" />

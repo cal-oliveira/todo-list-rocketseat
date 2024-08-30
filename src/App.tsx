@@ -35,6 +35,17 @@ function App() {
     setTasks(newList)
   }
 
+  function updateTask(taskToUpdate: string){
+    const updatedTasks = tasks.map((task) => {
+      if(task.task === taskToUpdate){
+        return { ...task, isDone: !task.isDone }
+      }
+      return task
+    })
+
+    setTasks(updatedTasks)
+  }
+
   return (
     <div className='flex flex-col items-center'>
       <Header />
@@ -47,6 +58,7 @@ function App() {
         <Tasks 
           tasks={tasks}
           deleteTask={deleteTask}
+          updateTask={updateTask}
         />
       </div>
     </div>
