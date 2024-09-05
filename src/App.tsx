@@ -41,6 +41,10 @@ function App() {
       }
     }
 
+    if(newTask.task === ''){
+      return
+    }
+
     setTasks([...tasks,newTask])
 
     setInputTask('')
